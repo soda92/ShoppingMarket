@@ -5,16 +5,23 @@ plugins {
 
 repositories{
     maven {
-        url 'http://maven.aliyun.com/nexus/content/groups/public/'
+        url 'https://maven.aliyun.com/nexus/content/groups/public/'
     }
     maven {
-        url 'http://maven.aliyun.com/nexus/content/repositories/jcenter'
+        url 'https://maven.aliyun.com/nexus/content/repositories/jcenter'
     }
 }
 
 dependencies{
+    // https://mvnrepository.com/artifact/mysql/mysql-connector-java
+    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.19'
+    // https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java
+    // compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59'
     // https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api
     providedCompile group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
     // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
-    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.6.0'
+    // testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.6.0'
+
+    // testCompile("io.github.bonigarcia:webdrivermanager:3.8.1")
+    // testCompile("io.github.bonigarcia:selenium-jupiter:3.3.4")
 }
