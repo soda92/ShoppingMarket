@@ -98,6 +98,33 @@ public class OrderDao {
         }
     }
 
+    public static int getLatestOrderId() {
+        int ret = 0;
+        try {
+            Connection c = Conn.getConn();
+            String sql = "select id from orde where fin=0";
+            PreparedStatement ps = c.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            int cnt = 0;
+            while (rs.next()) {
+                ret = rs.getInt("id");
+                ++cnt;
+            }
+            if (cnt == 0) {
+                String sql2 = "insert into orde (fin,cost) values (0,0)";
+                PreparedStatement ps2 = c.prepareStatement(sql2);
+                ps2.executeUpdate();
+                ps2.close();
+                ret = getLatestOrderId();
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ret;
+    }
+
     public static void updateOrderDecreaseItem(int orderid, int itemid) {
         try {
             Connection c = Conn.getConn();

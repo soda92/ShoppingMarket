@@ -3,10 +3,8 @@ import java.sql.*;
 import java.util.Date;
 import java.util.Properties;
 
-import my.util.*;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.InputStream;
 import java.text.SimpleDateFormat;
 
 public class TestAddDate {

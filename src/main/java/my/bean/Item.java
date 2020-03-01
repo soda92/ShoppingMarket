@@ -58,4 +58,8 @@ public class Item {
         return this.type;
     }
 
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }

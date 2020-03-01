@@ -75,4 +75,16 @@ public class Order {
     public int getFin() {
         return this.fin;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder s = new StringBuilder();
+        for (int i = 0; i < items.size(); i++) {
+            s.append(items.get(i).toString());
+            s.append("x");
+            s.append(String.valueOf(nums.get(i)));
+            s.append(" ");
+        }
+        return s.toString();
+    }
 }

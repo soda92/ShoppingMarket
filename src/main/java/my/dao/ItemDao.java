@@ -51,4 +51,48 @@ public class ItemDao {
         }
         return ret;
     }
+
+    public static ArrayList<Item> getItemsWithType(String type) {
+        ArrayList<Item> ret = new ArrayList<>();
+        try {
+            Connection c = Conn.getConn();
+            String sql = "select dat,nam,img,des,typ from item where typ=?";
+            PreparedStatement ps = c.prepareStatement(sql);
+            ps.setString(1, type);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Item i = new Item();
+                i.setDate(rs.getDate("dat"));
+                i.setName(rs.getString("nam"));
+                i.setImg(rs.getString("img"));
+                i.setDesc(rs.getString("des"));
+                i.setType(rs.getString("typ"));
+                ret.add(i);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ret;
+    }
+
+    public static ArrayList<String> getTypes() {
+        ArrayList<String> ret = new ArrayList<>();
+        try {
+            Connection c = Conn.getConn();
+            String sql = "select distinct type from item";
+            PreparedStatement ps = c.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String type = new String(rs.getString("type"));
+                ret.add(type);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ret;
+    }
 }
