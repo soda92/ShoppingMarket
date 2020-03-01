@@ -19,9 +19,14 @@ dependencies{
     // compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59'
     // https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api
     providedCompile group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
-    // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
-    // testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.6.0'
+    
+    // Use JUnit Jupiter API for testing.
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.5.2'
+    // Use JUnit Jupiter Engine for testing.
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.5.2'
+}
 
-    // testCompile("io.github.bonigarcia:webdrivermanager:3.8.1")
-    // testCompile("io.github.bonigarcia:selenium-jupiter:3.3.4")
+test {
+    // Use junit platform for unit tests
+    useJUnitPlatform()
 }
