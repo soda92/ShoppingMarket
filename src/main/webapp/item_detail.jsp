@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>商品详情</title>
     <link rel="stylesheet" href="css/item_detail.css">
+    <link rel="stylesheet" href="css/common.css">
 </head>
 
 <body>
