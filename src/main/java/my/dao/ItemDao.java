@@ -10,16 +10,16 @@ public class ItemDao {
         Item i = new Item();
         try {
             Connection c = Conn.getConn();
-            String sql = "select (name,dat,img,des,type) from item where id=?";
+            String sql = "select (nam,dat,img,des,typ) from item where id=?";
             PreparedStatement ps = c.prepareStatement(sql);
             ps.setInt(1, itemid);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                i.setName(rs.getString("name"));
+                i.setName(rs.getString("nam"));
                 i.setDate(rs.getDate("dat"));
                 i.setImg(rs.getString("img"));
                 i.setDesc(rs.getString("des"));
-                i.setType(rs.getString("type"));
+                i.setType(rs.getString("typ"));
             }
             rs.close();
             ps.close();
@@ -34,14 +34,14 @@ public class ItemDao {
         try {
             Connection c = Conn.getConn();
             Statement stmt = c.createStatement();
-            ResultSet rs = stmt.executeQuery("select * from item");
+            ResultSet rs = stmt.executeQuery("select (dat,nam,img,des,typ) from item");
             while (rs.next()) {
                 Item i = new Item();
                 i.setDate(rs.getDate("dat"));
-                i.setName(rs.getString("name"));
+                i.setName(rs.getString("nam"));
                 i.setImg(rs.getString("img"));
                 i.setDesc(rs.getString("des"));
-                i.setType(rs.getString("type"));
+                i.setType(rs.getString("typ"));
                 ret.add(i);
             }
             rs.close();
@@ -81,11 +81,11 @@ public class ItemDao {
         ArrayList<String> ret = new ArrayList<>();
         try {
             Connection c = Conn.getConn();
-            String sql = "select distinct type from item";
+            String sql = "select distinct typ from item";
             PreparedStatement ps = c.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                String type = new String(rs.getString("type"));
+                String type = new String(rs.getString("typ"));
                 ret.add(type);
             }
             rs.close();
