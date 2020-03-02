@@ -29,6 +29,24 @@ public class UserDao {
         return ret;
     }
 
+    public static int findUser(String username, String password) {
+        int id = -1;
+        try {
+            Connection c = Conn.getConn();
+            String sql = "select id from user where username=? and password=?";
+            PreparedStatement ps = c.prepareStatement(sql);
+            ps.setString(1, username);
+            ps.setString(2, password);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                id=rs.getInt("id");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return id;
+    }
+
     public static void newUser(User user) {
         try {
             Connection c = Conn.getConn();

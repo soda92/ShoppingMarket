@@ -12,6 +12,19 @@
 
 <body>
     <h1>购物商城</h1>
+    <%
+    if(session.getAttribute("id")!=null){
+        int id=(int)session.getAttribute("id");
+        User user=UserDao.getUser(id);
+    %>
+    当前用户：<a href="../user/detail.jsp"><%=user.getUsername()%></a>
+    <%
+    }else{
+    %>
+    <a href="../user/login.jsp">登录</a>
+    <%
+    }
+    %>
     <div id="nav">
         <span>商品分类：</span>
         <%
