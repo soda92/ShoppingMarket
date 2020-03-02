@@ -4,11 +4,20 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Order {
+    private int id;
     private ArrayList<Item> items;
     private ArrayList<Integer> nums;
     private Date date;
     private int cost;
     private int fin;
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return this.id;
+    }
 
     public void addItem(Item item) {
         boolean find = false;

@@ -3,12 +3,21 @@ package my.bean;
 import java.util.Date;
 
 public class Item {
+    private int id;
     private String name;
     private int price;
     private Date date;
     private String img;
     private String desc;
     private String type;
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return this.id;
+    }
 
     public void setName(String name) {
         this.name = name;

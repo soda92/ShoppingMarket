@@ -12,14 +12,15 @@ public class OrderDao {
         Order ret = new Order();
         try {
             Connection c = Conn.getConn();
-            String sql = "select (id,fin,dat,cost) from orde";
+            String sql = "select id,fin,dat,cost from orde";
             PreparedStatement ps = c.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
+                ret.setId(rs.getInt("id"));
                 ret.setDate(rs.getDate("dat"));
                 ret.setFin(rs.getInt("fin"));
                 ret.setCost(rs.getInt("cost"));
-                String sql2 = "select (itemid,num) from order_item where orderid=?";
+                String sql2 = "select itemid,num from order_item where orderid=?";
                 PreparedStatement ps2 = c.prepareStatement(sql2);
                 ps2.setInt(1, orderid);
                 ResultSet rs2 = ps.executeQuery();
@@ -67,7 +68,7 @@ public class OrderDao {
     public static void updateOrderIncreaseItem(int orderid, int itemid) {
         try {
             Connection c = Conn.getConn();
-            String sql = "select (orderid,itemid) from order_item where orderid=? and itemid=?";
+            String sql = "select orderid,itemid from order_item where orderid=? and itemid=?";
             PreparedStatement ps = c.prepareStatement(sql);
             ps.setInt(1, orderid);
             ps.setInt(2, itemid);
@@ -128,7 +129,7 @@ public class OrderDao {
     public static void updateOrderDecreaseItem(int orderid, int itemid) {
         try {
             Connection c = Conn.getConn();
-            String sql = "select (orderid,itemid) from order_item where orderid=? and itemid=?";
+            String sql = "select orderid,itemid from order_item where orderid=? and itemid=?";
             PreparedStatement ps = c.prepareStatement(sql);
             ps.setInt(1, orderid);
             ps.setInt(2, itemid);
@@ -164,14 +165,15 @@ public class OrderDao {
         try {
             Connection c = Conn.getConn();
             Statement stmt = c.createStatement();
-            ResultSet rs = stmt.executeQuery("select (id,fin,dat,cost) from orde");
+            ResultSet rs = stmt.executeQuery("select id,fin,dat,cost from orde");
             Order o = new Order();
             while (rs.next()) {
+                o.setId(rs.getInt("id"));
                 o.setDate(rs.getDate("dat"));
                 o.setFin(rs.getInt("fin"));
                 o.setCost(rs.getInt("cost"));
                 int orderid = rs.getInt("id");
-                String sql = "select (itemid,num) from order_item where orderid=?";
+                String sql = "select itemid,num from order_item where orderid=?";
                 PreparedStatement ps = c.prepareStatement(sql);
                 ps.setInt(1, orderid);
                 ResultSet rs2 = ps.executeQuery();

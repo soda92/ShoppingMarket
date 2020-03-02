@@ -56,12 +56,13 @@ public class ItemDao {
         ArrayList<Item> ret = new ArrayList<>();
         try {
             Connection c = Conn.getConn();
-            String sql = "select dat,nam,img,des,typ from item where typ=?";
+            String sql = "select id,dat,nam,img,des,typ from item where typ=?";
             PreparedStatement ps = c.prepareStatement(sql);
             ps.setString(1, type);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Item i = new Item();
+                i.setId(rs.getInt("id"));
                 i.setDate(rs.getDate("dat"));
                 i.setName(rs.getString("nam"));
                 i.setImg(rs.getString("img"));

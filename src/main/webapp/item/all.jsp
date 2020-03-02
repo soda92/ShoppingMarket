@@ -37,7 +37,8 @@
     ArrayList<Item> items=ItemDao.getItemsWithType(type);
     for(Item i:items){
         %>
-    <img src="" alt="">
+    <img src="../static/img/<%=i.getImg()%>" alt="">
+    <a href="detail.jsp?itemid=<%="></a>
         <%
     }
     %>

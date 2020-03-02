@@ -1,11 +1,20 @@
 package my.bean;
 
 public class User {
+    private int id;
     private String username;
     private String password;
     private int money;
     private String address;
     private String phone;
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return this.id;
+    }
 
     public void setUsername(String username) {
         this.username = username;

@@ -9,11 +9,12 @@ public class UserDao {
         User ret = new User();
         try {
             Connection c = Conn.getConn();
-            String sql = "select (username,password,money,address,phone) from user where userid=?";
+            String sql = "select id,username,password,money,address,phone from user where id=?";
             PreparedStatement ps = c.prepareStatement(sql);
             ps.setInt(1, userid);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
+                ret.setId(rs.getInt("id"));
                 ret.setUsername(rs.getString("username"));
                 ret.setPassword(rs.getString("password"));
                 ret.setMoney(rs.getInt("money"));
@@ -45,11 +46,11 @@ public class UserDao {
         }
     }
 
-    public static void updateUser(int userid,User user){
-        try{
-            Connection c=Conn.getConn();
-            String sql="update user set username=?,password=?,money=?,address=?,phone=? where id=?";
-            PreparedStatement ps=c.prepareStatement(sql);
+    public static void updateUser(int userid, User user) {
+        try {
+            Connection c = Conn.getConn();
+            String sql = "update user set username=?,password=?,money=?,address=?,phone=? where id=?";
+            PreparedStatement ps = c.prepareStatement(sql);
             ps.setString(1, user.getUsername());
             ps.setString(2, user.getPassword());
             ps.setInt(3, user.getMoney());
@@ -57,20 +58,20 @@ public class UserDao {
             ps.setString(5, user.getPhone());
             ps.executeUpdate();
             ps.close();
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public static void deleteUser(int userid){
-        try{
-            Connection c=Conn.getConn();
-            String sql="delete from user where id=?";
-            PreparedStatement ps=c.prepareStatement(sql);
+    public static void deleteUser(int userid) {
+        try {
+            Connection c = Conn.getConn();
+            String sql = "delete from user where id=?";
+            PreparedStatement ps = c.prepareStatement(sql);
             ps.setInt(1, userid);
             ps.executeUpdate();
             ps.close();
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
