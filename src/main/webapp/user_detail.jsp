@@ -24,9 +24,11 @@
     <p>地址：<%=user.getAddress()%></p>
     <p>电话：<%=user.getPhone()%></p>
 
-    <a href="../funds/add.jsp">充值</a>
-    <a href="../item/all.jsp">首页</a>
-    <a href="../user/logout.jsp">退出登录</a>
+    <a href="add_funds.jsp">充值</a>
+    <a href="index.jsp">首页</a>
+    <a href="cart.jsp">购物车</a>
+    <a href="order_index.jsp">历史订单</a>
+    <a href="logout.jsp">退出登录</a>
 </body>
 
 </html>

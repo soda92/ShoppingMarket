@@ -16,7 +16,7 @@ if(username!=null && password!=null){
     int id=UserDao.findUser(username,password);
     if(id!=-1){
         session.setAttribute("id",id);
-        response.sendRedirect("../item/all.jsp");
+        response.sendRedirect("index.jsp");
     }
 }
 %>
@@ -26,6 +26,7 @@ if(username!=null && password!=null){
         密码：<input type="password" name="password" id="">
         <br>
         <button type="submit">登录</button>
+        <a href="register.jsp">注册</a>
     </form>
 </body>
 

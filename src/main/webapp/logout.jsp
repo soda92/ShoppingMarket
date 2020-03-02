@@ -16,8 +16,8 @@
     }
     %>
     <p>退出成功</p>
-    <a href="../user/login.jsp">重新登录</a>
-    <a href="../item/all.jsp">首页</a>
+    <a href="login.jsp">重新登录</a>
+    <a href="index.jsp">首页</a>
 </body>
 
 </html>

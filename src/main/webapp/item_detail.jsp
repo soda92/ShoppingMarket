@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>商品详情</title>
-    <link rel="stylesheet" href="../static/css/item_detail.css">
+    <link rel="stylesheet" href="css/item_detail.css">
 </head>
 
 <body>
@@ -20,17 +20,17 @@
     String[] des=i.getDesc().split(";");
     %>
     <h1><%=i.getName()%></h1>
-    <img src="../static/img/<%=i.getImg()%>" alt="" class="item">
+    <img src="img/<%=i.getImg()%>" alt="" class="item">
     <p>
         <h2>商品价格:<%=i.getPrice()%></h2>
-        <a href="../cart/index.jsp?itemid=<%=i.getId()%>">添加到购物车</a>
-        <a href="../item/all.jsp">返回</a>
+        <a href="cart.jsp?itemid=<%=i.getId()%>">添加到购物车</a>
+        <a href="index.jsp">返回</a>
     </p>
     <div class="desc">
         <%
     for(String s:des){
     %>
-        <img src="../static/img/<%=s%>" alt="" class="des">
+        <img src="img/<%=s%>" alt="" class="des">
         <%
     }
     %>

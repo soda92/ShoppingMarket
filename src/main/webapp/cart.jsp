@@ -32,8 +32,8 @@
     }
     %>
     </ul>
-    <a href="../item/all.jsp">继续购物</a>
-    <a href="../pay/pay.jsp?orderid=<%=order.getId()%>">结算</a>
+    <a href="index.jsp">继续购物</a>
+    <a href="pay.jsp?orderid=<%=order.getId()%>">结算</a>
 </body>
 
 </html>

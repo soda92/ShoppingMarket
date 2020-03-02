@@ -41,7 +41,8 @@ public class OrderDao {
         return ret;
     }
 
-    public static void finOrder(int orderid) {
+    public static int finOrder(int userid, int orderid) {
+        int cost = 0;
         try {
             Connection c = Conn.getConn();
             String sql = "update orde set fin=1, dat=?, cost=? where id=?";
@@ -50,13 +51,24 @@ public class OrderDao {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String str = formatter.format(d);
             ps.setString(1, str);
-            int cost = 0;
             Order order = getOrder(orderid);
             for (int i = 0; i < order.getItems().size(); i++) {
                 cost += order.getItems().get(i).getPrice() * order.getNums().get(i);
             }
             ps.setInt(2, cost);
             ps.setInt(3, orderid);
+            ps.executeUpdate();
+            ps.close();
+            sql = "insert into user_order(userid,orderid) values (?,?)";
+            ps = c.prepareStatement(sql);
+            ps.setInt(1, userid);
+            ps.setInt(2, orderid);
+            ps.executeUpdate();
+            ps.close();
+            sql = "update user set money=money-? where id=?";
+            ps = c.prepareStatement(sql);
+            ps.setInt(1, cost);
+            ps.setInt(2, userid);
             ps.executeUpdate();
             ps.close();
             sql = "insert into orde (fin,cost) values (0,0)";
@@ -66,6 +78,7 @@ public class OrderDao {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return cost;
     }
 
     public static void updateOrderIncreaseItem(int orderid, int itemid) {
@@ -192,6 +205,29 @@ public class OrderDao {
             stmt.close();
             ret.add(o);
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ret;
+    }
+
+    public static ArrayList<Order> getOrders(int userid) {
+        ArrayList<Order> ret=new ArrayList<>();
+        ArrayList<Integer> ids=new ArrayList<>();
+        try{
+            Connection c=Conn.getConn();
+            String sql="SELECT DISTINCT orderid FROM user_order,orde WHERE user_order.userid=? and user_order.orderid=orde.id and orde.fin=1";
+            PreparedStatement ps=c.prepareStatement(sql);
+            ps.setInt(1,userid);
+            ResultSet rs=ps.executeQuery();
+            while(rs.next()){
+                int id=rs.getInt("orderid");
+                ids.add(id);
+            }
+            for(int id:ids){
+                Order order=OrderDao.getOrder(id);
+                ret.add(order);
+            }
+        }catch(Exception e){
             e.printStackTrace();
         }
         return ret;
