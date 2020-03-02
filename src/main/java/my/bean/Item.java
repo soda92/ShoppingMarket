@@ -5,7 +5,7 @@ import java.util.Date;
 public class Item {
     private int id;
     private String name;
-    private int price;
+    private double price;
     private Date date;
     private String img;
     private String desc;
@@ -27,11 +27,11 @@ public class Item {
         return this.name;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return this.price;
     }
 

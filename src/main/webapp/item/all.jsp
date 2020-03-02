@@ -18,7 +18,7 @@
     ArrayList<String> types=ItemDao.getTypes();
     for(String type:types){
     %>
-        <a href="/item/all.jsp?type=<%=type%>"><%=type%></a>
+        <a href="all.jsp?type=<%=type%>"><%=type%></a>
         <%
     }
     %>
@@ -33,12 +33,14 @@
     %>
     </p>
     <div id="list">
-    <%
+        <%
     ArrayList<Item> items=ItemDao.getItemsWithType(type);
     for(Item i:items){
         %>
-    <img src="../static/img/<%=i.getImg()%>" alt="">
-    <a href="detail.jsp?itemid=<%="></a>
+        <div class="item">
+            <img src="../static/img/<%=i.getImg()%>" alt="">
+            <a href="detail.jsp?itemid=<%=i.getId()%>"><%=i.getName()%></a>
+        </div>
         <%
     }
     %>

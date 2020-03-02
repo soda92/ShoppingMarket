@@ -1,0 +1,35 @@
+<%@page import="java.util.*,my.dao.*,my.util.*,my.bean.*" pageEncoding="utf-8"%>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商品详情</title>
+    <link rel="stylesheet" href="../static/css/item_detail.css">
+</head>
+
+<body>
+    <%
+    String strId=request.getParameter("itemid");
+    int id=4;
+    if(strId!=null){
+        id=Integer.parseInt(strId);
+    }
+    Item i=ItemDao.getItem(id);
+    String[] des=i.getDesc().split(";");
+    %>
+    <h1><%=i.getName()%></h1>
+    <img src="../static/img/<%=i.getImg()%>" alt="" class="item">
+    <h2>商品价格:<%=i.getPrice()%></h2>
+    <div class="desc">
+    <%
+    for(String s:des){
+    %>
+    <img src="../static/img/<%=s%>" alt="" class="des">
+    <%
+    }
+    %>
+    </div>
+</body>
+</html>

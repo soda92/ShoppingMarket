@@ -10,7 +10,7 @@ public class ItemDao {
         Item i = new Item();
         try {
             Connection c = Conn.getConn();
-            String sql = "select (nam,dat,img,des,typ) from item where id=?";
+            String sql = "select nam,dat,img,des,typ,pri from item where id=?";
             PreparedStatement ps = c.prepareStatement(sql);
             ps.setInt(1, itemid);
             ResultSet rs = ps.executeQuery();
@@ -20,6 +20,7 @@ public class ItemDao {
                 i.setImg(rs.getString("img"));
                 i.setDesc(rs.getString("des"));
                 i.setType(rs.getString("typ"));
+                i.setPrice(rs.getDouble("pri"));
             }
             rs.close();
             ps.close();
@@ -34,7 +35,7 @@ public class ItemDao {
         try {
             Connection c = Conn.getConn();
             Statement stmt = c.createStatement();
-            ResultSet rs = stmt.executeQuery("select (dat,nam,img,des,typ) from item");
+            ResultSet rs = stmt.executeQuery("select dat,nam,img,des,typ,pri from item");
             while (rs.next()) {
                 Item i = new Item();
                 i.setDate(rs.getDate("dat"));
@@ -42,6 +43,7 @@ public class ItemDao {
                 i.setImg(rs.getString("img"));
                 i.setDesc(rs.getString("des"));
                 i.setType(rs.getString("typ"));
+                i.setPrice(rs.getDouble("pri"));
                 ret.add(i);
             }
             rs.close();
@@ -56,7 +58,7 @@ public class ItemDao {
         ArrayList<Item> ret = new ArrayList<>();
         try {
             Connection c = Conn.getConn();
-            String sql = "select id,dat,nam,img,des,typ from item where typ=?";
+            String sql = "select id,dat,nam,img,des,typ,pri from item where typ=?";
             PreparedStatement ps = c.prepareStatement(sql);
             ps.setString(1, type);
             ResultSet rs = ps.executeQuery();
@@ -68,6 +70,7 @@ public class ItemDao {
                 i.setImg(rs.getString("img"));
                 i.setDesc(rs.getString("des"));
                 i.setType(rs.getString("typ"));
+                i.setPrice(rs.getDouble("pri"));
                 ret.add(i);
             }
             rs.close();
