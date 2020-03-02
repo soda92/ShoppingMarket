@@ -21,15 +21,20 @@
     %>
     <h1><%=i.getName()%></h1>
     <img src="../static/img/<%=i.getImg()%>" alt="" class="item">
-    <h2>商品价格:<%=i.getPrice()%></h2>
+    <p>
+        <h2>商品价格:<%=i.getPrice()%></h2>
+        <a href="../cart/index.jsp?itemid=<%=i.getId()%>">添加到购物车</a>
+        <a href="../item/all.jsp">返回</a>
+    </p>
     <div class="desc">
-    <%
+        <%
     for(String s:des){
     %>
-    <img src="../static/img/<%=s%>" alt="" class="des">
-    <%
+        <img src="../static/img/<%=s%>" alt="" class="des">
+        <%
     }
     %>
     </div>
 </body>
+
 </html>

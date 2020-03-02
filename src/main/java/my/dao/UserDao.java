@@ -38,8 +38,8 @@ public class UserDao {
             ps.setString(1, username);
             ps.setString(2, password);
             ResultSet rs = ps.executeQuery();
-            while(rs.next()){
-                id=rs.getInt("id");
+            while (rs.next()) {
+                id = rs.getInt("id");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -74,6 +74,7 @@ public class UserDao {
             ps.setInt(3, user.getMoney());
             ps.setString(4, user.getAddress());
             ps.setString(5, user.getPhone());
+            ps.setInt(6, userid);
             ps.executeUpdate();
             ps.close();
         } catch (Exception e) {

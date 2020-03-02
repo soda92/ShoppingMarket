@@ -4,12 +4,21 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Order {
-    private int id;
+    private Integer id;
     private ArrayList<Item> items;
     private ArrayList<Integer> nums;
     private Date date;
     private int cost;
     private int fin;
+
+    public Order() {
+        this.id = null;
+        this.items = new ArrayList<>();
+        this.nums = new ArrayList<>();
+        this.date = new Date();
+        this.cost = 0;
+        this.fin = 0;
+    }
 
     public void setId(int id) {
         this.id = id;

@@ -12,26 +12,29 @@ public class OrderDao {
         Order ret = new Order();
         try {
             Connection c = Conn.getConn();
-            String sql = "select id,fin,dat,cost from orde";
+            String sql = "select id,fin,dat,cost from orde where id=?";
             PreparedStatement ps = c.prepareStatement(sql);
+            ps.setInt(1, orderid);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 ret.setId(rs.getInt("id"));
                 ret.setDate(rs.getDate("dat"));
                 ret.setFin(rs.getInt("fin"));
                 ret.setCost(rs.getInt("cost"));
-                String sql2 = "select itemid,num from order_item where orderid=?";
-                PreparedStatement ps2 = c.prepareStatement(sql2);
-                ps2.setInt(1, orderid);
-                ResultSet rs2 = ps.executeQuery();
-                while (rs2.next()) {
-                    Item i = ItemDao.getItem(rs2.getInt("itemid"));
-                    int num = rs2.getInt("num");
-                    ret.addItems(i, num);
-                }
-                rs2.close();
-                ps.close();
             }
+            rs.close();
+            ps.close();
+            String sql2 = "select itemid,num from order_item where orderid=?";
+            PreparedStatement ps2 = c.prepareStatement(sql2);
+            ps2.setInt(1, orderid);
+            ResultSet rs2 = ps2.executeQuery();
+            while (rs2.next()) {
+                int itemid = rs2.getInt("itemid");
+                Item i = ItemDao.getItem(itemid);
+                int num = rs2.getInt("num");
+                ret.addItems(i, num);
+            }
+            rs2.close();
         } catch (Exception e) {
             e.printStackTrace();
         }

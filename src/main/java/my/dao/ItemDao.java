@@ -10,7 +10,7 @@ public class ItemDao {
         Item i = new Item();
         try {
             Connection c = Conn.getConn();
-            String sql = "select nam,dat,img,des,typ,pri from item where id=?";
+            String sql = "select nam,dat,img,des,typ,pri,id from item where id=?";
             PreparedStatement ps = c.prepareStatement(sql);
             ps.setInt(1, itemid);
             ResultSet rs = ps.executeQuery();
@@ -21,6 +21,7 @@ public class ItemDao {
                 i.setDesc(rs.getString("des"));
                 i.setType(rs.getString("typ"));
                 i.setPrice(rs.getDouble("pri"));
+                i.setId(rs.getInt("id"));
             }
             rs.close();
             ps.close();
