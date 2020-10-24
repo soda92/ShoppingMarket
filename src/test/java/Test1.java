@@ -11,10 +11,6 @@ public class Test1 {
         Connection c = Conn.getConn();
         assertNotEquals(null, c, "connection null");
     }
-    @Test
-    public void test2(){
-        System.out.println(ClassLoader.getSystemClassLoader().getResource("file2").toString());
-    }
 
     @Test
     public void test3() throws Exception{
